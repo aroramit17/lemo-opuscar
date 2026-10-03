@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPUSCAR 98 · 98 Years of Best Picture, made in code by Claude Opus 5.5</title>
+<meta name="description" content="{{DESC}}">
+{{HEAD_META}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* same house as the gallery (styleboard/template.html): black stage, gold foil, velvet */
+:root{
+  --black:#070605; --stage:#0d0a08; --plate:#120e0b; --plate2:#19130e;
+  --gold:#d4b064; --gold-hi:#f6e0a0; --ink:#f3ead8; --soft:#b9a98c; --dim:#7a6d5a;
+  --velvet-hi:#a3202a; --line:rgba(212,176,100,.26);
+  --foil:linear-gradient(100deg,#8a6526 0%,#e9c979 22%,#fff1c2 34%,#d8b163 46%,#9b7430 62%,#f2d88f 82%,#a47b32 100%);
+  --serif:"Cormorant Garamond","Noto Serif SC",Georgia,serif; --caps:Cinzel,"Noto Serif SC",serif; --cn:"Noto Serif SC","Songti SC",serif;
+}
+*{box-sizing:border-box}
+html{background:var(--black)}
+body{margin:0;color:var(--ink);font:17px/1.6 var(--serif);
+  background:radial-gradient(1000px 560px at 50% 22%, rgba(212,176,100,.13), transparent 70%), var(--black)}
+a{color:var(--gold)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.back{display:inline-block;margin:26px 0 0;font:600 11.5px/1 var(--caps);letter-spacing:.24em;text-transform:uppercase;color:var(--soft);text-decoration:none}
+.back:hover{color:var(--gold-hi)}
+header{text-align:center;padding:40px 0 0}
+.kicker{margin:0;font:600 13px/1 var(--caps);letter-spacing:.46em;color:var(--velvet-hi);text-transform:uppercase}
+.kicker small{display:block;margin-top:10px;font:500 13px/1 var(--cn);letter-spacing:.3em;color:var(--soft)}
+h1{margin:18px 0 0;font:900 clamp(46px,8vw,110px)/.95 var(--caps);letter-spacing:.06em;text-wrap:balance;
+  background:var(--foil);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 0 rgba(0,0,0,.45)) drop-shadow(0 10px 40px rgba(212,176,100,.28))}
+.sub{margin:14px 0 0;font:600 clamp(12px,1.5vw,15px)/1.4 var(--caps);letter-spacing:.3em;color:var(--gold-hi);text-transform:uppercase}
+.frame{position:relative;margin:34px auto 0;padding:14px;background:linear-gradient(180deg,#1d160f,#0e0a07);
+  border:1px solid rgba(212,176,100,.6);box-shadow:0 0 0 6px rgba(212,176,100,.08),0 40px 90px -30px #000,0 0 120px rgba(212,176,100,.12)}
+.frame video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:#000}
+.blurb{max-width:760px;margin:30px auto 0;text-align:center;font:italic 500 clamp(19px,2.2vw,24px)/1.45 var(--serif);text-wrap:balance}
+.blurb-cn{max-width:680px;margin:10px auto 0;text-align:center;font:500 14.5px/1.8 var(--cn);color:var(--soft)}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 26px;margin:26px 0 0;font:600 11.5px/1 var(--caps);letter-spacing:.2em;text-transform:uppercase}
+.links a{text-decoration:none;color:var(--soft);border-bottom:1px solid transparent;padding-bottom:3px}
+.links a:hover{color:var(--gold-hi);border-color:var(--gold)}
+.links .main{color:var(--gold)}
+.credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin:56px 0 0;border-top:1px solid var(--line)}
+.credits div{padding:20px 22px;border-bottom:1px solid var(--line);min-width:0}
+.credits dt{font:600 10.5px/1 var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.credits dd{margin:8px 0 0;font:500 18px/1.35 var(--serif);color:var(--ink)}
+.credits dd small{display:block;margin-top:4px;font:400 13px/1.5 var(--cn);color:var(--soft)}
+.made{max-width:68ch;margin:56px auto 0}
+.made h2{margin:0;text-align:center;font:700 clamp(20px,2.6vw,28px)/1.2 var(--caps);letter-spacing:.14em;text-transform:uppercase;
+  background:var(--foil);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.made p{margin:18px 0 0;color:#dfd3bb}
+.made p.cn{margin-top:8px;font:400 14px/1.85 var(--cn);color:var(--soft)}
+.repo{display:flex;justify-content:center;margin:36px 0 0}
+.repo a{display:inline-flex;align-items:center;gap:12px;padding:13px 22px 12px;border:1px solid var(--gold);background:rgba(0,0,0,.28);
+  color:var(--gold-hi);font:600 13px/1 var(--caps);letter-spacing:.24em;text-transform:uppercase;text-decoration:none}
+.repo a:hover,.repo a:focus-visible{background:var(--gold);color:#140e06}
+footer{text-align:center;padding:60px 16px 56px;border-top:1px solid var(--line);margin-top:70px}
+footer .sig{margin:0;font:600 13px/1 var(--caps);letter-spacing:.42em;color:var(--gold);text-transform:uppercase}
+footer .fine{margin:14px 0 0;font:italic 500 16px/1.5 var(--serif);color:var(--soft)}
+footer .fine-cn{margin:6px 0 0;font:400 13px/1.6 var(--cn);color:var(--dim)}
+a:focus-visible{outline:1px solid var(--gold-hi);outline-offset:3px}
+@media (max-width:720px){.wrap{padding:0 16px}.frame{padding:8px}.sub{letter-spacing:.18em}.credits div{padding:16px 4px}.repo a{font-size:10.5px;letter-spacing:.1em;padding:12px 14px 11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← All {{N_ALL}} styles · 全部风格</a>
+
+  <header>
+    <p class="kicker">Feature Presentation · Lemo-Opuscar<small>特别放映</small></p>
+    <h1>Opuscar 98</h1>
+    <p class="sub">98 Years of Best Picture · 1927 – 2025 · {{FEATURE_DUR}}</p>
+  </header>
+
+  <div class="frame"><video controls playsinline preload="none" poster="{{FEATURE_POSTER}}" src="{{FEATURE_SRC}}"></video></div>
+
+  <p class="blurb">One Clawd walks through all 98 Best Picture winners, each one redrawn in a style that fits the film. Every frame, every note and every cut was written in code by Claude Opus 5.5.</p>
+  <p class="blurb-cn">一个 Clawd 走过 98 部最佳影片，每一部都换成贴合那部电影的画风。每一帧画面、每一个音符、每一刀剪辑，都是 Claude Opus 5.5 写代码做出来的。</p>
+  <nav class="links"><a class="main" href="{{FEATURE_FULL}}" target="_blank" rel="noopener">Download · 1080p</a><a href="{{REPO_URL}}" target="_blank" rel="noopener">Source repo · 仓库</a><a href="../">The {{N_ALL}} styles · 风格图鉴</a></nav>
+
+  <dl class="credits">
+    <div><dt>Running time</dt><dd>{{FEATURE_DUR}}<small>98 部影片，1927 – 2025</small></dd></div>
+    <div><dt>Made with</dt><dd>Claude Opus 5.5 in Claude Code<small>导演、作画、配乐、剪辑都是代码</small></dd></div>
+    <div><dt>Video model</dt><dd>None<small>没有用视频生成模型</small></dd></div>
+    <div><dt>By</dt><dd>Lemomo · LemoLab<small><a href="https://x.com/lemomo_ai" target="_blank" rel="noopener">@lemomo_ai</a> · <a href="https://github.com/lemomo-ai" target="_blank" rel="noopener">github.com/lemomo-ai</a></small></dd></div>
+  </dl>
+
+  <section class="made">
+    <h2>How it was made</h2>
+    <p>No video model drew this film. Claude Opus 5.5, working in Claude Code, wrote each set, the character animation, the camera moves, the edit and the score as code, and the code rendered them to video.</p>
+    <p class="cn">这部片没有用视频模型生成。Claude Opus 5.5 在 Claude Code 里把每个布景、角色动画、运镜、剪辑和配乐都写成代码，再由代码渲染成视频。</p>
+    <p>The same approach is packaged as Lemo-Opuscar: {{N_ALL}} film styles, each a style prompt plus a demo film, installable as a Claude Code skill so your agent can direct a film about your own topic.</p>
+    <p class="cn">同样的做法整理成了 Lemo-Opuscar：{{N_ALL}} 种影片风格，每种是一份风格提示词加一支样片，可以装成 Claude Code skill，让你的 agent 给你自己的题材导一支片。</p>
+  </section>
+
+  <div class="repo"><a href="{{REPO_URL}}" target="_blank" rel="noopener">github.com/{{REPO}}</a></div>
+</div>
+
+<footer>
+  <p class="sig">LemoLab × Claude Opus 5.5</p>
+  <p class="fine">Official repository: github.com/{{REPO}}, by Lemomo.</p>
+  <p class="fine-cn">官方仓库：github.com/{{REPO}}，作者 Lemomo。</p>
+</footer>
+</body>
+</html>

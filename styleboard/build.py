@@ -149,24 +149,100 @@ for i, (cn, en) in enumerate(cats, 1):
 
 # the feature presentation above the nominees: Opuscar 98 (the film lives in promo/, which is not in the repo;
 # the gallery streams the 720p web cut from Pages, the 1080p file is on the "films" release, the poster is styleboard/img)
-FEATURE = dict(poster='img/feature_opuscar98.jpg', dur='6:25',
+FEATURE = dict(poster='img/feature_opuscar98.jpg', dur='6:31',
                src='films/opuscar98.mp4' if site else '../.release/web/opuscar98.mp4', full=f'{FILMS_URL}/opuscar98.mp4')
 n_vid = sum(bool(s.get('video')) for s in styles)
 minutes = sum(s.get('dur', 0) for s in styles) / 60
-page = open(os.path.join(HERE, 'template.html'), encoding='utf-8').read()
-for k, v in {'{{LAUREL}}': laurel_symbol(), '{{SECTIONS}}': '\n'.join(sections), '{{TABS}}': ''.join(tabs),
-             '{{N_ALL}}': str(len(styles)), '{{N_VID}}': str(n_vid), '{{N_CAT}}': str(len(cats)), '{{MIN}}': f'{minutes:.0f}',
-             '{{REPO_URL}}': f'https://github.com/{REPO}', '{{REPO}}': REPO,
-             '{{FEATURE_POSTER}}': FEATURE['poster'], '{{FEATURE_SRC}}': FEATURE['src'], '{{FEATURE_FULL}}': FEATURE['full'], '{{FEATURE_DUR}}': FEATURE['dur']}.items():
-    page = page.replace(k, v)
+n_all = len(styles)
+
+# What search engines and AI answer engines read: canonical URL, share cards, JSON-LD naming the upstream repo and its author.
+# Forks copy this file, so the canonical and codeRepository keep pointing here.
+SITE_URL = 'https://lemomo-ai.github.io/lemo-opuscar/'
+REPO_URL = f'https://github.com/{REPO}'
+AUTHOR = {'@type': 'Person', '@id': 'https://github.com/lemomo-ai', 'name': 'Lemomo', 'url': 'https://github.com/lemomo-ai',
+          'sameAs': ['https://x.com/lemomo_ai', 'https://github.com/lemomo-ai']}
+GALLERY_DESC = (f'Lemo-Opuscar: {n_all} film styles for Claude Code. Each style is a reusable prompt plus a short film made entirely in code '
+                'by Claude Opus 5.5, with no video model. Includes OPUSCAR 98, 98 years of Best Picture. Official site of github.com/' + REPO + '.')
+FILM_URL = SITE_URL + 'opuscar98/'
+FILM_DESC = ('OPUSCAR 98: one Clawd walks through all 98 Best Picture winners (1927 – 2025), each redrawn in a style that fits the film. '
+             'Every frame, note and cut was written in code by Claude Opus 5.5, with no video model.')
+REPO_LD = {'@type': 'SoftwareSourceCode', '@id': REPO_URL, 'name': 'Lemo-Opuscar', 'url': REPO_URL, 'codeRepository': REPO_URL,
+           'description': f'{n_all} film styles, each a style prompt plus a demo film made entirely in code, packaged as a Claude Code skill.',
+           'license': 'https://opensource.org/licenses/MIT', 'author': {'@id': AUTHOR['@id']},
+           'keywords': ['Claude Code skill', 'Claude Opus 5.5', 'film styles', 'no video model', 'motion graphics', 'creative coding']}
+
+def head_meta(url, title, desc, image, ld):
+    """canonical + Open Graph + Twitter card + one JSON-LD block, for the <head> of a site page."""
+    e = html.escape
+    tags = [f'<link rel="canonical" href="{url}">',
+            '<meta property="og:type" content="website">', '<meta property="og:site_name" content="Lemo-Opuscar">',
+            f'<meta property="og:url" content="{url}">', f'<meta property="og:title" content="{e(title)}">',
+            f'<meta property="og:description" content="{e(desc)}">', f'<meta property="og:image" content="{image}">',
+            '<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:site" content="@lemomo_ai">',
+            f'<meta name="twitter:title" content="{e(title)}">', f'<meta name="twitter:description" content="{e(desc)}">',
+            f'<meta name="twitter:image" content="{image}">']
+    data = json.dumps({'@context': 'https://schema.org', '@graph': ld}, ensure_ascii=False, indent=1).replace('</', '<\\/')
+    return '\n'.join(tags) + f'\n<script type="application/ld+json">\n{data}\n</script>'
+
+def mm_ss_iso(t):   # "6:31" → "PT6M31S"
+    m, s = t.split(':'); return f'PT{int(m)}M{int(s)}S'
+
+poster_abs = SITE_URL + FEATURE['poster']
+gallery_meta = head_meta(SITE_URL, f'Lemo-Opuscar · {n_all} film styles for Claude Code, made in code', GALLERY_DESC, poster_abs,
+                         [{'@type': 'CollectionPage', '@id': SITE_URL, 'url': SITE_URL, 'name': 'Lemo-Opuscar gallery', 'description': GALLERY_DESC,
+                           'about': {'@id': REPO_URL}, 'author': {'@id': AUTHOR['@id']}, 'hasPart': {'@id': FILM_URL}}, REPO_LD, AUTHOR])
+film_meta = head_meta(FILM_URL, 'OPUSCAR 98 · 98 Years of Best Picture, made in code by Claude Opus 5.5', FILM_DESC, poster_abs,
+                      [{'@type': 'VideoObject', '@id': FILM_URL, 'url': FILM_URL, 'name': 'OPUSCAR 98 · 98 Years of Best Picture',
+                        'description': FILM_DESC, 'thumbnailUrl': poster_abs, 'uploadDate': '2026-09-29', 'duration': mm_ss_iso(FEATURE['dur']),
+                        'contentUrl': FEATURE['full'], 'embedUrl': FILM_URL, 'inLanguage': 'en', 'creator': {'@id': AUTHOR['@id']},
+                        'isBasedOn': {'@id': REPO_URL}}, REPO_LD, AUTHOR])
+
+def fill(name, extra):
+    page = open(os.path.join(HERE, name), encoding='utf-8').read()
+    for k, v in {**extra, '{{N_ALL}}': str(n_all), '{{N_VID}}': str(n_vid), '{{N_CAT}}': str(len(cats)), '{{MIN}}': f'{minutes:.0f}',
+                 '{{REPO_URL}}': REPO_URL, '{{REPO}}': REPO, '{{FEATURE_FULL}}': FEATURE['full'], '{{FEATURE_DUR}}': FEATURE['dur']}.items():
+        page = page.replace(k, v)
+    return page
+
 out_dir = site or HERE
-os.makedirs(out_dir, exist_ok=True)
-open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8').write(page)
-if site:   # Pages site: page + style frames + posters
+os.makedirs(os.path.join(out_dir, 'opuscar98'), exist_ok=True)
+open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8').write(fill('template.html', {
+    '{{LAUREL}}': laurel_symbol(), '{{SECTIONS}}': '\n'.join(sections), '{{TABS}}': ''.join(tabs),
+    '{{DESC}}': html.escape(GALLERY_DESC), '{{HEAD_META}}': gallery_meta,
+    '{{FEATURE_POSTER}}': FEATURE['poster'], '{{FEATURE_SRC}}': FEATURE['src']}))
+# OPUSCAR 98 has its own page (one level down, so its relative paths start with ../)
+open(os.path.join(out_dir, 'opuscar98', 'index.html'), 'w', encoding='utf-8').write(fill('opuscar98.html', {
+    '{{DESC}}': html.escape(FILM_DESC), '{{HEAD_META}}': film_meta,
+    '{{FEATURE_POSTER}}': '../' + FEATURE['poster'], '{{FEATURE_SRC}}': '../' + FEATURE['src']}))
+
+def llms_txt():
+    """llms.txt (llmstxt.org): what the project is, where the upstream repo is, and a link per style."""
+    out = ['# Lemo-Opuscar', '',
+           f'> {n_all} film styles for Claude Code. Each style is a reusable style prompt (STYLE.md) plus a short demo film made entirely in code '
+           'by Claude Opus 5.5, with no video model. Install it as a Claude Code skill, pick a style, bring your own topic, and your agent directs the film.', '',
+           f'Official repository: {REPO_URL} (by Lemomo, https://x.com/lemomo_ai). Forks are copies; this is the upstream.', '',
+           '## Start here', '',
+           f'- [README]({BLOB_URL}/README.md): what it is, how to install the skill, the style grid',
+           f'- [Agent instructions]({BLOB_URL}/AGENTS.md): how an agent directs a film in one of the styles',
+           f'- [Gallery]({SITE_URL}): every style with its demo film',
+           f'- [OPUSCAR 98]({FILM_URL}): 98 Years of Best Picture ({FEATURE["dur"]}), the feature film made with these tools', '']
+    for cn, en in cats:
+        group = [x for x in styles if x['cat'] == cn and x['stylemd']]
+        if not group: continue
+        out += [f'## {en}', '']
+        out += [f'- [{s["en"]} · {s["cn"]}]({BLOB_URL}/styles/{s["slug"]}/STYLE.md): {s["line"]}' for s in group]
+        out.append('')
+    return '\n'.join(out)
+
+if site:   # Pages site: pages + style frames + posters + llms.txt + sitemap
     shutil.copytree(os.path.join(HERE, 'img'), os.path.join(site, 'img'), dirs_exist_ok=True)
     os.makedirs(os.path.join(site, 'posters'), exist_ok=True)
     for s in styles:
         if s['poster']: shutil.copy(os.path.join(ROOT, 'styles', s['slug'], 'poster.jpg'), os.path.join(site, 'posters', s['slug'] + '.jpg'))
+    open(os.path.join(site, 'llms.txt'), 'w', encoding='utf-8').write(llms_txt())
+    open(os.path.join(site, 'sitemap.xml'), 'w', encoding='utf-8').write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in (SITE_URL, FILM_URL)) + '</urlset>\n')
 
 
 def readme_grid():

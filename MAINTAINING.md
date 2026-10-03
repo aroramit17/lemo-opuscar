@@ -35,6 +35,8 @@ Assets are CC0, CC BY or OFL only, each in `demo/CREDITS`. No watermark on any f
 2. `git status --short`, `git add -A`, commit.
 3. Push `main`, then watch CI (`gh run watch`): the gallery build fails when a card links a film that isn't on the `web` release.
 
+The Pages build (`build.py --site`) also writes the OPUSCAR 98 page (`opuscar98/`, from `styleboard/opuscar98.html`), `llms.txt` and `sitemap.xml`, and puts the canonical link, share-card tags and JSON-LD (upstream repo and author) in each page's head. They pick up the style count by themselves; the film's runtime is `FEATURE['dur']` in `build.py`.
+
 Don't push before the upload has finished, and don't commit `tools/assets.json` from a failed run.
 
 ## Revise a style

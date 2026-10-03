@@ -10,6 +10,8 @@ Pick a style, bring your own story, and let your coding agent direct the film.<b
 
 [**▶ Watch the gallery · 看图鉴**](https://lemomo-ai.github.io/lemo-opuscar/)
 
+<sub>Official repo · 官方仓库：[github.com/lemomo-ai/lemo-opuscar](https://github.com/lemomo-ai/lemo-opuscar) · by Lemomo ([@lemomo_ai](https://x.com/lemomo_ai))</sub>
+
 **New · 新增：** Copperplate Engraving 铜版画 · Sci-fi Hologram HUD 科幻全息界面 · Mid-century Cartoon 50s 扁平卡通 · Silkscreen Travel Poster 丝印旅行海报
 
 </div>
@@ -18,17 +20,17 @@ Pick a style, bring your own story, and let your coding agent direct the film.<b
 
 <div align="center">
 
-<a href="https://lemomo-ai.github.io/lemo-opuscar/#opuscar98"><img src="docs/opuscar98.jpg" alt="OPUSCAR 98 — 98 Years of Best Picture" width="100%"></a>
+<a href="https://lemomo-ai.github.io/lemo-opuscar/opuscar98/"><img src="docs/opuscar98.jpg" alt="OPUSCAR 98 — 98 Years of Best Picture" width="100%"></a>
 
-**98 Years of Best Picture · 1927 – 2025 · 6:25**<br>
-**98 年最佳影片 · 1927 – 2025 · 6 分 25 秒**
+**98 Years of Best Picture · 1927 – 2025 · 6:31**<br>
+**98 年最佳影片 · 1927 – 2025 · 6 分 31 秒**
 
 One Clawd walks through all 98 Best Picture winners, each one redrawn in a style that fits the film.<br>
 Every frame, every note and every cut was written in code by Claude Opus 5.5.<br>
 一个 Clawd 走过 98 部最佳影片，每一部都换成贴合那部电影的画风。<br>
 每一帧画面、每一个音符、每一刀剪辑，都是 Claude Opus 5.5 写代码做出来的。
 
-[**▶ Watch · 观看**](https://lemomo-ai.github.io/lemo-opuscar/#opuscar98) · [**Download 1080p · 下载**](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/opuscar98.mp4)
+[**▶ Watch · 观看**](https://lemomo-ai.github.io/lemo-opuscar/opuscar98/) · [**Download 1080p · 下载**](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/opuscar98.mp4)
 
 </div>
 
