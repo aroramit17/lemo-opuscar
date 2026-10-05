@@ -1,11 +1,27 @@
-# Lemo-Opuscar: instructions for agents
+# Opuscar Social: instructions for agents
+
+This repository is a fork of [Lemo-Opuscar](https://github.com/lemomo-ai/lemo-opuscar) (MIT), retargeted at **social media videos**: TikTok, Instagram Reels, YouTube Shorts, LinkedIn, X. It keeps the original code-rendered film engine and adds a social layer on top.
+
+**Default to the social workflow.** Unless the user asks for a cinematic film, a request for "a video" means a short-form social video:
+
+1. Read [`SOCIAL.md`](SOCIAL.md): format presets, safe zones, hooks, captions, loops, the post pack.
+2. Pick a style from [`social/README.md`](social/README.md) (ten social styles, chosen by job: teach, sell, entertain, prove, loop).
+3. Direct and build with [`DIRECTOR.md`](DIRECTOR.md) and [`TECHNIQUE.md`](TECHNIQUE.md), using the social defaults: **1080x1920, 30 fps, 20-45 s, burned-in captions, -14 LUFS.**
+4. Deliver the video, `cover.jpg`, `.srt` and `POST.md` (SOCIAL.md §11-12).
+
+If the user names one of the 43 cinematic styles below, use it and apply SOCIAL.md §3-9 on top.
+
+---
+
+The rest of this file is the original library guide, which still applies to everything not overridden by SOCIAL.md.
 
 This repository is a library of film styles. Each style has a `styles/<slug>/STYLE.md` (what the style is) and one demo film made entirely in code (`DEMO.md` and `demo/`). People pick a style and ask for a film about **their own** topic. Your job is to direct and produce that film.
 
 | The request | Go to |
 |---|---|
-| A film about the user's topic (the normal case) | **Style and story**, **Workflow** below |
-| "Which styles are there?" / no style chosen | **Finding the style** below |
+| A social video (the normal case here) | [`SOCIAL.md`](SOCIAL.md), then **Style and story** and **Workflow** below |
+| A film about the user's topic in a cinematic style | **Style and story**, **Workflow** below |
+| "Which styles are there?" / no style chosen | [`social/README.md`](social/README.md) first, then **Finding the style** below |
 | Directing: story, sound, rhythm, camera, checks, delivery | [`DIRECTOR.md`](DIRECTOR.md) |
 | Building: install, pages, voice, music, mix | [`TECHNIQUE.md`](TECHNIQUE.md) |
 | Tool commands and flags | [`core/README.md`](core/README.md) |
@@ -28,7 +44,7 @@ Users name a style by its gallery name in English or Chinese ("Impasto Oil Paint
 If the user hasn't picked a style:
 - Suggest two or three that fit their topic.
 - Show them the full list below in the chat, in the user's language only: English names (and English category names) for someone writing in English, Chinese names for someone writing in Chinese. Don't drop, merge or rename anything.
-- Link the gallery, where every style has its demo film: https://lemomo-ai.github.io/lemo-opuscar/
+- Link the original gallery of the 43 cinematic styles, each with a demo film: https://lemomo-ai.github.io/lemo-opuscar/
 
 <!-- style-list:start -->
 All 43 styles · 全部风格:
@@ -46,7 +62,7 @@ All 43 styles · 全部风格:
 
 ## Workflow
 
-1. **Brief.** Make sure the style and the topic are clear, then ask the user once, in a single message (DIRECTOR.md §1):
+1. **Brief.** Make sure the style and the topic are clear, then ask the user once, in a single message (SOCIAL.md §1 for social videos, DIRECTOR.md §1 otherwise):
    - anything about the topic you can't decide yourself (facts; names, logos or products that must appear);
    - whether they have material of their own: a voice recording or a preferred voice, music, photos, logos, fonts;
    - the film's language, if it isn't obvious (default: the language they write in, for voice and subtitles);
