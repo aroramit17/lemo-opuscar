@@ -1,17 +1,17 @@
 {
-  "name": "lemolab",
+  "name": "opuscar-social",
   "owner": {
-    "name": "Lemomo",
-    "url": "https://github.com/lemomo-ai"
+    "name": "Amit",
+    "url": "https://github.com/aroramit17"
   },
   "metadata": {
-    "description": "LemoLab skills: film styles for coding agents."
+    "description": "Opuscar Social: code-rendered short-form video for TikTok, Reels, Shorts, LinkedIn and X. A fork of lemomo-ai/lemo-opuscar (MIT)."
   },
   "plugins": [
     {
-      "name": "lemo-opuscar",
+      "name": "opuscar-social",
       "source": "./plugin",
-      "description": "Make a film in one of the library's code-rendered styles: your agent directs, draws, scores and mixes it."
+      "description": "Make a social media video in code: your agent writes the hook, captions, voice, music and post copy, and renders it vertical-ready."
     }
   ]
 }
