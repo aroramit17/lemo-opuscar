@@ -1,15 +1,15 @@
 ---
-name: lemo-opuscar
-description: Direct and produce a short film made entirely in code, in one of the styles of the Lemo-Opuscar library (e.g. Impasto Oil Painting 油画厚涂, Watercolor Brush 水彩笔刷, Chinese Ink Wash 中国水墨, Ukiyo-e 浮世绘, Whiteboard Explainer 白板讲解). Use when the user asks for a video, film, short, promo, explainer or animation (视频、短片、动画、宣传片) in a named style; when they want a film made about their own topic and haven't chosen a style (help them choose); or when they ask which film styles there are. Not for editing or converting existing video files.
+name: opuscar-social
+description: Direct and produce a short social media video (TikTok, Instagram Reels, YouTube Shorts, LinkedIn, X) made entirely in code, with captions, voice, music and a ready-to-paste post pack. Use when the user asks for a reel, short, TikTok, social video, promo clip, explainer, ad, tutorial video, listicle, or any short-form video, whether or not they name a style; also for a cinematic film style from the library. Not for editing or converting existing video files.
 ---
 
-# Lemo-Opuscar
+# Opuscar Social
 
-The styles, guides and tools live in the Lemo-Opuscar library (github.com/lemomo-ai/lemo-opuscar). This skill fetches it and hands you over to it.
+The styles, guides and tools live in the Opuscar Social library (github.com/aroramit17/lemo-opuscar, a social-video fork of lemomo-ai/lemo-opuscar). This skill fetches it and hands you over to it.
 
 1. **Get the library.** Run `sh "<skill base directory>/scripts/setup.sh"`. It clones or updates the library (default `~/lemo-opuscar`; a clone the user is standing in is used as it is) and prints `LIB=<path>` on its last line.
 2. **Install the core tools early.** Start `sh "<skill base directory>/scripts/setup.sh" deps` right away, in the background if you can: it takes a few minutes the first time. Add `deps voice` or `deps music` later, only if the film needs them (`$LIB/TECHNIQUE.md` §1). Report missing system tools in your one round of questions; don't install system software yourself.
-3. **Follow the library.** Read `$LIB/AGENTS.md` and do what it says: finding the style, the one round of questions, the treatment, production and delivery.
+3. **Follow the library.** Read `$LIB/AGENTS.md`, then `$LIB/SOCIAL.md` for any short-form video, and do what they say: choosing a style from `$LIB/social/README.md`, the one round of questions, the treatment, production and delivery. Social defaults: 1080x1920, 30 fps, burned-in captions, `cover.jpg`, `.srt` and `POST.md`.
 
 What changes in skill mode:
 
@@ -21,4 +21,4 @@ What changes in skill mode:
 | Library files in scripts and `build.sh` | `$LIB/…`, with `LIB=<path>` at the top of `build.sh`; never `../..` |
 | Demo source | not downloaded. `sh "<skill base directory>/scripts/setup.sh" demo <slug>`, only after your `TREATMENT.md` is written, to read its techniques; it is not meant to be rendered |
 
-Deliver what `$LIB/DIRECTOR.md` §11 lists, in the project folder, and tell the user where it is.
+Deliver what `$LIB/SOCIAL.md` §11 lists (for a cinematic film, `$LIB/DIRECTOR.md` §11), in the project folder, and tell the user where it is.
