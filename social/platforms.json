@@ -1,0 +1,13 @@
+{
+  "_note": "Conservative defaults for planning. Platform limits and interface layouts change; verify before publishing.",
+  "presets": {
+    "vertical":  { "size": "1080x1920", "aspect": "9:16", "fps": 30, "targetSec": [15, 45], "platforms": ["TikTok", "Instagram Reels", "YouTube Shorts", "Stories", "X"] },
+    "portrait":  { "size": "1080x1350", "aspect": "4:5",  "fps": 30, "targetSec": [15, 60], "platforms": ["Instagram feed", "LinkedIn feed", "Facebook feed"] },
+    "square":    { "size": "1080x1080", "aspect": "1:1",  "fps": 30, "targetSec": [15, 60], "platforms": ["LinkedIn", "X", "Facebook"] },
+    "landscape": { "size": "1920x1080", "aspect": "16:9", "fps": 30, "targetSec": [30, 90], "platforms": ["YouTube", "X", "website embeds"] }
+  },
+  "safeZone1080x1920": { "left": 64, "right": 140, "top": 220, "bottom": 400, "captionBandY": [1050, 1450] },
+  "loudnessLUFS": -14,
+  "render": "node core/render/video.mjs <project> --fps 30 --size <size>",
+  "mux": "sh core/render/mux.sh video.mp4 mix.wav out.mp4 30"
+}
